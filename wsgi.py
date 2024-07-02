@@ -124,7 +124,10 @@ def index():
     form = NameForm()
     equity_data = None
     starting = None
-    luck = None
+    my_average = None
+    my_number_of_hands = None
+    my_standard_deviation = None
+    my_predicted_average = None
     if form.validate_on_submit():
         starting = form.starting.data.upper()[:2] + form.starting.data[-1]
         equity_data = (
