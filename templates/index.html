@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Equity Calculator</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Equity Calculator</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.starting.label }}<br>
+                {{ form.starting(size=32, class="form-control") }}
+                {% for error in form.starting.errors %}
+                <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.players.label }}<br>
+                {{ form.players(class="form-check-input") }}
+                {% for error in form.players.errors %}
+                <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+        {% if equity_data %}
+        <h2>Equity for {{ starting }}:</h2>
+        {% if form.players.data == "2" %}
+        <p>{{ equity_data.players_2 }}</p>
+        {% elif form.players.data == "6" %}
+        <p>{{ equity_data.players_6 }}</p>
+        {% elif form.players.data == "9" %}
+        <p>{{ equity_data.players_9 }}</p>
+        {% endif %}
+        <h2>Overall Equity:</h2>
+        <p>{{ my_average }}</p>
+        <h2>Standard Distribution:</h2>
+        <p>{{ my_standard_deviation }}</p>
+        <h2>Number of Hands:</h2>
+        <p>{{ my_number_of_hands }}</p>
+        <h2>Predicted Equity:</h2>
+        <p>{{ my_predicted_average }}</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
